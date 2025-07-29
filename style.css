@@ -73,17 +73,17 @@ h1 {
   overflow-x: auto;
   width: 100%;
   padding: 10px 0;
-  /* For smooth scroll in some browsers */
   scroll-behavior: smooth;
+  /* Ensure no overflow hidden or transform here to keep sticky working */
 }
 
-/* Scroll arrows */
+/* Scroll arrows smaller */
 .scroll-arrow {
   background-color: rgba(76, 175, 80, 0.8);
   color: white;
-  font-size: 1.5rem;
+  font-size: 1.1rem;  /* smaller */
   border: none;
-  padding: 8px 14px;
+  padding: 6px 10px;  /* smaller padding */
   border-radius: 8px;
   cursor: pointer;
   z-index: 2;
@@ -119,13 +119,15 @@ th, td {
   text-align: center;
 }
 
-/* Sticky player name column */
+/* Sticky first column: applied to first <th> and <td> and sticky-col class */
+table th:first-child,
+table td:first-child,
 .sticky-col {
   position: sticky;
   left: 0;
-  background: #a5d6a7;  /* solid background */
-  z-index: 10;          /* above other cells */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+  background: #a5d6a7;
+  z-index: 10;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
   font-weight: 600;
   border-right: 2px solid #7cb342;
 }
