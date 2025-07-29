@@ -80,9 +80,9 @@ h1 {
 .scroll-arrow {
   background-color: rgba(76, 175, 80, 0.8);
   color: white;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   border: none;
-  padding: 6px 10px;
+  padding: 4px 7px;
   border-radius: 8px;
   cursor: pointer;
   z-index: 20;
