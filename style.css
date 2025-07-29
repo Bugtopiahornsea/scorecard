@@ -93,6 +93,15 @@ input[type="number"] {
   border-radius: 6px;
   border: 1px solid #aaa;
 }
+.table-scroll {
+  overflow-x: auto;
+  width: 100%;
+}
+
+.table-scroll table {
+  min-width: 900px; /* or 1000px depending on your table */
+}
+
 
 /* Save button */
 .save-button {
