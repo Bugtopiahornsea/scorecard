@@ -1,86 +1,35 @@
-const scorecard = document.getElementById("scorecard");
-const history = document.getElementById("history");
-const players = [];
-const holes = 9;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prehistoric Par Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <img src="prehistoric-par-logo.jpg" alt="Prehistoric Par Logo" class="logo" />
+      <h1>Prehistoric Par Scorecard</h1>
+    </div>
 
-function createTable() {
-  let html = `<table><thead><tr><th>Player</th>`;
-  for (let i = 1; i <= holes; i++) {
-    html += `<th>Hole ${i}</th>`;
-  }
-  html += `<th>Total</th></tr></thead><tbody>`;
+    <div class="add-player">
+      <input type="text" id="playerName" placeholder="Add player name" />
+      <button onclick="addPlayer()">Add Player</button>
+    </div>
 
-  players.forEach((player, index) => {
-    html += `<tr><td>${player}</td>`;
-    for (let i = 0; i < holes; i++) {
-      html += `<td><input type="number" min="1" max="10" onchange="updateTotal(${index})" /></td>`;
-    }
-    html += `<td id="total-${index}">0</td></tr>`;
-  });
+    <div id="scorecard">
+      <!-- Scorecard table will be inserted here -->
+    </div>
 
-  html += `</tbody></table>`;
-  scorecard.innerHTML = html;
-}
+    <button class="save-button" onclick="saveGame()">Save Game</button>
 
-function addPlayer() {
-  const input = document.getElementById("playerName");
-  const name = input.value.trim();
-  if (!name) return;
-  players.push(name);
-  input.value = "";
-  createTable();
-}
+    <div id="history" class="history">
+      <h2>Game History</h2>
+    </div>
+  </div>
 
-function updateTotal(playerIndex) {
-  const row = scorecard.querySelectorAll("tbody tr")[playerIndex];
-  const inputs = row.querySelectorAll("input");
-  let total = 0;
-  inputs.forEach(input => {
-    total += Number(input.value) || 0;
-  });
-  document.getElementById(`total-${playerIndex}`).textContent = total;
-}
-
-function saveGame() {
-  const rows = scorecard.querySelectorAll("tbody tr");
-  let game = {
-    date: new Date().toLocaleString(),
-    players: []
-  };
-
-  rows.forEach((row, index) => {
-    const name = players[index];
-    const scores = Array.from(row.querySelectorAll("input")).map(input => Number(input.value) || 0);
-    const total = scores.reduce((a, b) => a + b, 0);
-    game.players.push({ name, scores, total });
-  });
-
-  renderHistoryGame(game);
-  localStorage.setItem("prehistoricHistory", JSON.stringify([...loadHistory(), game]));
-}
-
-function loadHistory() {
-  return JSON.parse(localStorage.getItem("prehistoricHistory")) || [];
-}
-
-function renderHistoryGame(game) {
-  const container = document.createElement("div");
-  container.className = "history-game";
-  const header = document.createElement("h3");
-  header.textContent = game.date;
-  container.appendChild(header);
-
-  game.players.forEach(p => {
-    const line = document.createElement("p");
-    line.textContent = `${p.name}: ${p.scores.join(", ")} = ${p.total}`;
-    container.appendChild(line);
-  });
-
-  history.appendChild(container);
-}
-
-// Load past games on start
-window.onload = () => {
-  const games = loadHistory();
-  games.forEach(renderHistoryGame);
-};
+  <script src="app.js"></script>
+</body>
+</html>
