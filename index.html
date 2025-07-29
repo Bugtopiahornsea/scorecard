@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Prehistoric Par Scorecard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
@@ -18,11 +18,10 @@
       <button onclick="addPlayer()">Add Player</button>
     </div>
 
-    <!-- Scorecard wrapper with arrows and scroll container -->
     <div class="scorecard-wrapper">
-      <button class="scroll-arrow left" onclick="scrollScorecard(-1)">&#8592;</button>
-      <div class="table-scroll" id="tableScrollContainer"></div>
-      <button class="scroll-arrow right" onclick="scrollScorecard(1)">&#8594;</button>
+      <button class="scroll-arrow left" onclick="scrollTable(-150)">&#8592;</button>
+      <div class="table-scroll" id="scorecard"></div>
+      <button class="scroll-arrow right" onclick="scrollTable(150)">&#8594;</button>
     </div>
 
     <button class="save-button" onclick="saveGame()">Save Game</button>
