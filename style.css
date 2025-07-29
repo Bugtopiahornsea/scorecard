@@ -26,7 +26,7 @@ body {
 }
 
 .logo {
-  height: 200px;             /* Slightly smaller if needed */
+  height: 250px;             /* Slightly smaller if needed */
   width: auto;
   border-radius: 12px;
   max-width: 90%;
