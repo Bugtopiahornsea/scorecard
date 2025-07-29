@@ -1,46 +1,121 @@
+/* Page background and layout */
 body {
-  font-family: 'Arial', sans-serif;
-  background: #e0ffe0;
+  font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+  background: url('https://images.unsplash.com/photo-1620111262211-f7c7e7ef0e5c?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
   padding: 20px;
+  margin: 0;
+  color: #2c2c2c;
 }
+
+/* App container */
 .app {
   max-width: 1000px;
-  margin: 0 auto;
+  margin: auto;
+  background: rgba(255, 255, 255, 0.9);
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
 }
+
+/* Header */
 .header {
   text-align: center;
+  margin-bottom: 20px;
 }
 .logo {
-  max-height: 100px;
+  max-height: 120px;
+  border-radius: 12px;
 }
+h1 {
+  font-size: 2.2em;
+  color: #2e7d32;
+  text-shadow: 2px 2px #aad576;
+}
+
+/* Add player section */
 .add-player {
-  margin: 20px 0;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
-input[type="text"], input[type="number"] {
-  padding: 5px;
-  margin: 2px;
+.add-player input[type="text"] {
+  padding: 10px;
+  font-size: 16px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-right: 10px;
 }
-button {
-  padding: 6px 10px;
-  background: #4CAF50;
-  border: none;
+.add-player button {
+  background-color: #4caf50;
   color: white;
+  border: none;
+  padding: 10px 16px;
+  font-size: 16px;
+  border-radius: 10px;
   cursor: pointer;
 }
-button:hover {
-  background: #45a049;
+.add-player button:hover {
+  background-color: #45a049;
 }
+
+/* Scorecard table */
 table {
   width: 100%;
   border-collapse: collapse;
-  margin-top: 10px;
+  margin-bottom: 20px;
+  background: #f0fff0;
+  border-radius: 10px;
+  overflow: hidden;
 }
 th, td {
-  border: 1px solid #999;
-  padding: 5px;
+  border: 1px solid #ccc;
+  padding: 8px;
   text-align: center;
 }
+th {
+  background-color: #a5d6a7;
+}
+input[type="number"] {
+  width: 50px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #aaa;
+}
+
+/* Save button */
+.save-button {
+  display: block;
+  margin: 0 auto;
+  padding: 10px 20px;
+  font-size: 18px;
+  background-color: #388e3c;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+}
+.save-button:hover {
+  background-color: #2e7d32;
+}
+
+/* History section */
 .history {
   margin-top: 30px;
+  background: #e8f5e9;
+  padding: 15px;
+  border-radius: 12px;
+}
+.history h2 {
+  text-align: center;
+  color: #33691e;
+}
+.history-game {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px dashed #9ccc65;
+}
+.history-game h3 {
+  margin-bottom: 5px;
 }
