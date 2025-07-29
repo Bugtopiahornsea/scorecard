@@ -119,9 +119,8 @@ th, td {
 }
 
 /* Sticky first column */
-table th:first-child,
-table td:first-child,
-.sticky-col {
+th:first-child,
+td:first-child {
   position: sticky;
   left: 0;
   background: #a5d6a7;
