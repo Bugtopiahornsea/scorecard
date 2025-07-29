@@ -16,7 +16,7 @@ function addPlayer() {
 
 function updateScore(player, hole, value) {
   scores[player][hole] = value;
-  renderScorecard(); // This auto-updates total after each change
+  renderScorecard();
 }
 
 function getTotal(player) {
@@ -24,20 +24,20 @@ function getTotal(player) {
 }
 
 function renderScorecard() {
-  const container = document.getElementById("scorecard");
+  const container = document.getElementById("tableScrollContainer");
   if (!players.length) {
     container.innerHTML = "";
     return;
   }
 
-  let html = `<div class="table-scroll"><table><thead><tr><th>Player</th>`;
+  let html = `<table><thead><tr><th class="sticky-col">Player</th>`;
   for (let i = 0; i < TOTAL_HOLES; i++) {
     html += `<th>Hole ${i + 1}</th>`;
   }
   html += `<th>Total</th></tr></thead><tbody>`;
 
   players.forEach(player => {
-    html += `<tr><td>${player}</td>`;
+    html += `<tr><td class="sticky-col">${player}</td>`;
     for (let i = 0; i < TOTAL_HOLES; i++) {
       const val = scores[player][i] || "";
       html += `
@@ -53,7 +53,7 @@ function renderScorecard() {
     html += `<td><strong>${getTotal(player)}</strong></td></tr>`;
   });
 
-  html += `</tbody></table></div>`; // Close wrapper
+  html += `</tbody></table>`;
   container.innerHTML = html;
 }
 
@@ -92,6 +92,15 @@ function renderHistory() {
   });
 
   historyDiv.innerHTML = html;
+}
+
+function scrollScorecard(direction) {
+  const scrollContainer = document.getElementById("tableScrollContainer");
+  const amount = 200; // pixels per click
+  scrollContainer.scrollBy({
+    left: direction * amount,
+    behavior: "smooth"
+  });
 }
 
 // On page load
