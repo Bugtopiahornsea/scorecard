@@ -4,13 +4,13 @@ let scores = {};
 let history = JSON.parse(localStorage.getItem("prehistoric_par_history") || "[]");
 
 function addPlayer() {
-  const input = document.getElementById("playerName");
-  const name = input.value.trim();
+  const nameInput = document.getElementById("playerName");
+  const name = nameInput.value.trim();
   if (!name) return;
   if (players.includes(name)) return alert("Player already added.");
   players.push(name);
   scores[name] = Array(TOTAL_HOLES).fill("");
-  input.value = "";
+  nameInput.value = "";
   renderScorecard();
 }
 
@@ -24,49 +24,38 @@ function getTotal(player) {
 }
 
 function renderScorecard() {
-  const container = document.getElementById("tableScrollContainer");
-  if (!players.length) {
+  const container = document.getElementById("scorecard");
+  if (players.length === 0) {
     container.innerHTML = "";
     return;
   }
 
-  let html = `<table><thead><tr><th class="sticky-col">Player</th>`;
+  let html = '<table><thead><tr><th>Player</th>';
   for (let i = 0; i < TOTAL_HOLES; i++) {
     html += `<th>Hole ${i + 1}</th>`;
   }
-  html += `<th>Total</th></tr></thead><tbody>`;
+  html += "<th>Total</th></tr></thead><tbody>";
 
   players.forEach(player => {
     html += `<tr><td class="sticky-col">${player}</td>`;
     for (let i = 0; i < TOTAL_HOLES; i++) {
-      const val = scores[player][i] || "";
-      html += `
-        <td>
-          <input 
-            type="number" 
-            min="1" max="10" 
-            value="${val}"
-            onchange="updateScore('${player}', ${i}, this.value)"
-          />
-        </td>`;
+      html += `<td><input type="number" min="1" max="10" value="${scores[player][i] || ''}" 
+        onchange="updateScore('${player}', ${i}, this.value)" /></td>`;
     }
-    html += `<td><strong>${getTotal(player)}</strong></td></tr>`;
+    html += `<td>${getTotal(player)}</td></tr>`;
   });
 
-  html += `</tbody></table>`;
+  html += "</tbody></table>";
   container.innerHTML = html;
 }
 
 function saveGame() {
-  if (!players.length) return alert("No players to save.");
-
-  const savedGame = {
+  const saved = {
     date: new Date().toLocaleString(),
     players: [...players],
     scores: JSON.parse(JSON.stringify(scores))
   };
-
-  history.unshift(savedGame);
+  history.unshift(saved);
   localStorage.setItem("prehistoric_par_history", JSON.stringify(history));
   alert("Game saved!");
   renderHistory();
@@ -74,37 +63,29 @@ function saveGame() {
 
 function renderHistory() {
   const historyDiv = document.getElementById("history");
-  if (!historyDiv) return;
-
   if (!history.length) {
-    historyDiv.innerHTML = "<h2>Game History</h2><p>No games yet.</p>";
+    historyDiv.innerHTML = "";
     return;
   }
-
-  let html = `<h2>Game History</h2>`;
+  let html = "<h2>Previous Games</h2>";
   history.forEach(game => {
     html += `<div class="history-game"><h3>${game.date}</h3><ul>`;
     game.players.forEach(player => {
       const total = game.scores[player].reduce((sum, v) => sum + (+v || 0), 0);
       html += `<li>${player}: ${total} strokes</li>`;
     });
-    html += `</ul></div>`;
+    html += "</ul></div>";
   });
-
   historyDiv.innerHTML = html;
 }
 
-function scrollScorecard(direction) {
-  const scrollContainer = document.getElementById("tableScrollContainer");
-  const amount = 200; // pixels per click
-  scrollContainer.scrollBy({
-    left: direction * amount,
-    behavior: "smooth"
+// Scroll table horizontally by distance (pixels)
+function scrollTable(distance) {
+  const container = document.querySelector('.table-scroll');
+  container.scrollBy({
+    left: distance,
+    behavior: 'smooth'
   });
 }
 
-// On page load
-window.onload = () => {
-  renderScorecard();
-  renderHistory();
-};
+renderHistory();
