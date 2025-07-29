@@ -37,7 +37,7 @@ function renderScorecard() {
   html += "<th>Total</th></tr></thead><tbody>";
 
   players.forEach(player => {
-    html += `<tr><td class="sticky-col">${player}</td>`;
+    html += `<tr><td>${player}</td>`;
     for (let i = 0; i < TOTAL_HOLES; i++) {
       html += `<td><input type="number" min="1" max="10" value="${scores[player][i] || ''}" 
         onchange="updateScore('${player}', ${i}, this.value)" /></td>`;
@@ -88,4 +88,8 @@ function scrollTable(distance) {
   });
 }
 
+// Render history on page load
 renderHistory();
+
+// Render empty scorecard on load so the container exists (optional)
+renderScorecard();
