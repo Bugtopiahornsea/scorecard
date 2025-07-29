@@ -44,21 +44,24 @@ h1 {
   margin-bottom: 20px;
 }
 .add-player input[type="text"] {
-  padding: 10px;
-  font-size: 16px;
-  border-radius: 10px;
+  padding: 6px 10px;
+  font-size: 14px;
+  border-radius: 8px;
   border: 1px solid #ccc;
-  margin-right: 10px;
+  margin-right: 8px;
+  width: 160px; 
 }
+
 .add-player button {
   background-color: #4caf50;
   color: white;
   border: none;
-  padding: 10px 16px;
-  font-size: 16px;
-  border-radius: 10px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 8px;
   cursor: pointer;
 }
+
 .add-player button:hover {
   background-color: #45a049;
 }
