@@ -21,25 +21,26 @@ body {
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 10px;       /* Less space under the header */
-  padding-top: 5px;          /* Less space above the logo */
+  margin-bottom: 5px;    /* less space below header */
+  padding-top: 0;        /* remove top padding */
 }
 
 .logo {
-  height: 250px;             /* Slightly smaller if needed */
-  width: auto;
+  height: 250px;         /* slightly smaller */
+  margin-bottom: 2px;    /* very little space below logo */
   border-radius: 12px;
   max-width: 90%;
-  margin-bottom: 5px;        /* Less space between logo and title */
+  width: auto;
 }
 
 h1 {
-  font-size: 2em;
+  font-size: 1.9em;
+  margin-top: 0;
+  margin-bottom: 5px;    /* minimal space below title */
   color: #2e7d32;
   text-shadow: 2px 2px #aad576;
-  margin-top: 0;             /* Remove extra space above title */
-  margin-bottom: 10px;       /* Keep some breathing room */
 }
+
 
 /* Add player section */
 .add-player {
