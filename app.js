@@ -30,7 +30,7 @@ function renderScorecard() {
     return;
   }
 
-  let html = `<table><thead><tr><th>Player</th>`;
+  let html = `<div class="table-scroll"><table><thead><tr><th>Player</th>`;
   for (let i = 0; i < TOTAL_HOLES; i++) {
     html += `<th>Hole ${i + 1}</th>`;
   }
@@ -53,7 +53,7 @@ function renderScorecard() {
     html += `<td><strong>${getTotal(player)}</strong></td></tr>`;
   });
 
-  html += `</tbody></table>`;
+  html += `</tbody></table></div>`; // Close wrapper
   container.innerHTML = html;
 }
 
