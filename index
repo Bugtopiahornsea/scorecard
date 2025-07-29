@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Prehistoric Par Scorecard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <div class="header">
+      <img src="assets/prehistoric-par-logo.jpg" alt="Prehistoric Par Logo" class="logo" />
+      <h1>Prehistoric Par Scorecard</h1>
+    </div>
+
+    <div class="add-player">
+      <input type="text" id="playerName" placeholder="Add player name" />
+      <button onclick="addPlayer()">Add Player</button>
+    </div>
+
+    <div id="scorecard"></div>
+
+    <button class="save-button" onclick="saveGame()">Save Game</button>
+
+    <div id="history" class="history"></div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
+✅ 2. style.css
+Create a file in the same folder called style.css and paste this:
+
+css
+Copy
+Edit
+body {
+  font-family: 'Arial', sans-serif;
+  background: #e0ffe0;
+  padding: 20px;
+}
+.app {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+.header {
+  text-align: center;
+}
+.logo {
+  max-height: 100px;
+}
+.add-player {
+  margin: 20px 0;
+  text-align: center;
+}
+input[type="text"], input[type="number"] {
+  padding: 5px;
+  margin: 2px;
+}
+button {
+  padding: 6px 10px;
+  background: #4CAF50;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+button:hover {
+  background: #45a049;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+th, td {
+  border: 1px solid #999;
+  padding: 5px;
+  text-align: center;
+}
+.history {
+  margin-top: 30px;
+}
