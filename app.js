@@ -30,22 +30,22 @@ function renderScorecard() {
     return;
   }
 
-  let html = '<table><thead><tr><th>Player</th>';
+  let html = '<div class="table-container"><table><thead><tr><th class="sticky-left">Player</th>';
   for (let i = 0; i < TOTAL_HOLES; i++) {
     html += `<th>Hole ${i + 1}</th>`;
   }
-  html += "<th>Total</th></tr></thead><tbody>";
+  html += '<th class="sticky-right">Total</th></tr></thead><tbody>';
 
   players.forEach(player => {
-    html += `<tr><td>${player}</td>`;
+    html += `<tr><td class="sticky-left">${player}</td>`;
     for (let i = 0; i < TOTAL_HOLES; i++) {
       html += `<td><input type="number" min="1" max="10" value="${scores[player][i] || ''}" 
         onchange="updateScore('${player}', ${i}, this.value)" /></td>`;
     }
-    html += `<td>${getTotal(player)}</td></tr>`;
+    html += `<td class="sticky-right">${getTotal(player)}</td></tr>`;
   });
 
-  html += "</tbody></table>";
+  html += "</tbody></table></div>";
   container.innerHTML = html;
 }
 
@@ -79,7 +79,6 @@ function renderHistory() {
   historyDiv.innerHTML = html;
 }
 
-// Scroll table horizontally
 function scrollTable(distance) {
   const container = document.querySelector('.table-scroll');
   container.scrollBy({
