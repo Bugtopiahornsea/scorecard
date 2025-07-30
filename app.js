@@ -55,6 +55,9 @@ function saveGame() {
     return;
   }
 
+  const confirmEnd = confirm("Are you sure you want to end your game?");
+  if (!confirmEnd) return;
+
   const saved = {
     date: new Date().toLocaleString(),
     players: [...players],
@@ -65,18 +68,17 @@ function saveGame() {
   localStorage.setItem("prehistoric_par_history", JSON.stringify(history));
   alert("Game ended and saved!");
 
-  // Reset players and scores to start a new game
+  // Reset everything for a new game
   players = [];
   scores = {};
-  
-  // Clear the input box too (optional)
+
   const nameInput = document.getElementById("playerName");
   if (nameInput) nameInput.value = "";
 
-  // Re-render the empty scorecard and history
   renderScorecard();
   renderHistory();
 }
+
 
 function renderHistory() {
   const historyDiv = document.getElementById("history");
