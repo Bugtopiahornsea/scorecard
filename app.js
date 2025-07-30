@@ -32,19 +32,17 @@ function renderScorecard() {
 
   let html = '<table><thead><tr><th>Player</th>';
   for (let i = 0; i < TOTAL_HOLES; i++) {
-    html += `<th>Hole ${i + 1}</th>`;
+    html += <th>Hole ${i + 1}</th>;
   }
-  // Sticky total column header
-  html += '<th class="sticky-total">Total</th></tr></thead><tbody>';
+  html += "<th>Total</th></tr></thead><tbody>";
 
   players.forEach(player => {
-    html += `<tr><td>${player}</td>`;
+    html += <tr><td>${player}</td>;
     for (let i = 0; i < TOTAL_HOLES; i++) {
-      html += `<td><input type="number" min="1" max="10" value="${scores[player][i] || ''}" 
-        onchange="updateScore('${player}', ${i}, this.value)" /></td>`;
+      html += <td><input type="number" min="1" max="10" value="${scores[player][i] || ''}" 
+        onchange="updateScore('${player}', ${i}, this.value)" /></td>;
     }
-    // Sticky total cell
-    html += `<td class="sticky-total">${getTotal(player)}</td></tr>`;
+    html += <td>${getTotal(player)}</td></tr>;
   });
 
   html += "</tbody></table>";
@@ -71,10 +69,10 @@ function renderHistory() {
   }
   let html = "<h2>Previous Games</h2>";
   history.forEach(game => {
-    html += `<div class="history-game"><h3>${game.date}</h3><ul>`;
+    html += <div class="history-game"><h3>${game.date}</h3><ul>;
     game.players.forEach(player => {
       const total = game.scores[player].reduce((sum, v) => sum + (+v || 0), 0);
-      html += `<li>${player}: ${total} strokes</li>`;
+      html += <li>${player}: ${total} strokes</li>;
     });
     html += "</ul></div>";
   });
@@ -90,6 +88,8 @@ function scrollTable(distance) {
   });
 }
 
-// Initial rendering
+// Render history on page load
 renderHistory();
+
+// Render empty scorecard on load so the container exists (optional)
 renderScorecard();
