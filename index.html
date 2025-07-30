@@ -18,11 +18,14 @@
       <button onclick="addPlayer()">Add Player</button>
     </div>
 
-    <div class="scorecard-wrapper">
-      <button class="scroll-arrow left" onclick="scrollTable(-150)">&#8592;</button>
-      <div class="table-scroll" id="scorecard"></div>
-      <button class="scroll-arrow right" onclick="scrollTable(150)">&#8594;</button>
-    </div>
+   <div class="scorecard-wrapper">
+  <div class="table-scroll" id="scorecard"></div>
+  <div class="scroll-controls">
+    <button class="scroll-arrow left" onclick="scrollTable(-150)">&#8592;</button>
+    <button class="scroll-arrow right" onclick="scrollTable(150)">&#8594;</button>
+  </div>
+</div>
+
 
     <button class="save-button" onclick="saveGame()">Save Game</button>
 
