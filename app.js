@@ -15,9 +15,20 @@ function addPlayer() {
 }
 
 function updateScore(player, hole, value) {
+  const num = parseInt(value, 10);
+  const maxStrokes = 10;
+
+  if (num > maxStrokes) {
+    alert(`The maximum number of strokes per hole is ${maxStrokes}.`);
+    // Reset to previous value
+    renderScorecard();
+    return;
+  }
+
   scores[player][hole] = value;
   renderScorecard();
 }
+
 
 function getTotal(player) {
   return scores[player].reduce((sum, v) => sum + (+v || 0), 0);
