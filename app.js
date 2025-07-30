@@ -50,14 +50,31 @@ function renderScorecard() {
 }
 
 function saveGame() {
+  if (players.length === 0) {
+    alert("No game to end. Please add players and scores first.");
+    return;
+  }
+
   const saved = {
     date: new Date().toLocaleString(),
     players: [...players],
     scores: JSON.parse(JSON.stringify(scores))
   };
+
   history.unshift(saved);
   localStorage.setItem("prehistoric_par_history", JSON.stringify(history));
-  alert("Game saved!");
+  alert("Game ended and saved!");
+
+  // Reset players and scores to start a new game
+  players = [];
+  scores = {};
+  
+  // Clear the input box too (optional)
+  const nameInput = document.getElementById("playerName");
+  if (nameInput) nameInput.value = "";
+
+  // Re-render the empty scorecard and history
+  renderScorecard();
   renderHistory();
 }
 
