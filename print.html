@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Printable Blank Scorecard</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      padding: 20px;
+      margin: 0;
+      color: #000;
+      background: white;
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #2e7d32;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 30px;
+    }
+
+    th, td {
+      border: 1px solid #aaa;
+      padding: 8px;
+      text-align: center;
+      height: 35px;
+    }
+
+    th {
+      background: #e0f2f1;
+    }
+
+    .note {
+      text-align: center;
+      font-size: 1rem;
+      margin-top: -10px;
+      font-weight: bold;
+      color: #d84315;
+    }
+
+    @media print {
+      body {
+        margin: 0;
+        padding: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Prehistoric Par Blank Scorecard</h1>
+  <div class="note">Maximum of 10 strokes per hole!</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Player</th>
+        <!-- Generate holes 1 to 13 -->
+        <!-- You can adjust if hole count changes -->
+        ${Array.from({ length: 13 }, (_, i) => `<th>Hole ${i + 1}</th>`).join('')}
+        <th>Total</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 6 blank player rows -->
+      ${Array.from({ length: 6 }, () => `
+        <tr>
+          <td>___________</td>
+          ${Array.from({ length: 13 }, () => `<td></td>`).join('')}
+          <td></td>
+        </tr>
+      `).join('')}
+    </tbody>
+  </table>
+
+  <script>
+    // Inject hole headers and rows dynamically into static HTML
+    document.body.innerHTML = document.body.innerHTML
+      .replace('${Array.from({ length: 13 }, (_, i) => `<th>Hole ${i + 1}</th>`).join(\'\')}', 
+        Array.from({ length: 13 }, (_, i) => `<th>Hole ${i + 1}</th>`).join(''))
+      .replace('${Array.from({ length: 6 }, () => `...`).join(\'\')}', 
+        Array.from({ length: 6 }, () =>
+          `<tr><td>___________</td>${Array.from({ length: 13 }, () => `<td></td>`).join('')}<td></td></tr>`
+        ).join('')
+      );
+  </script>
+</body>
+</html>
