@@ -133,3 +133,11 @@ window.addEventListener("load", function() {
   renderHistory();
   renderScorecard();
 });
+
+// ✅ Re-open the rules popup
+function openRules() {
+  const popup = document.getElementById("rulesPopup");
+  if (popup) {
+    popup.style.display = "flex";
+  }
+}
