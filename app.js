@@ -120,3 +120,15 @@ function scrollTable(distance) {
 // Init
 renderHistory();
 renderScorecard();
+
+// Close rules popup
+function closeRules() {
+  document.getElementById("rulesPopup").style.display = "none";
+}
+
+// Show popup on page load
+window.onload = function() {
+  document.getElementById("rulesPopup").style.display = "flex";
+  renderHistory();
+  renderScorecard();
+};
