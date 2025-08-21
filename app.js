@@ -29,7 +29,6 @@ function updateScore(player, hole, value) {
   renderScorecard();
 }
 
-
 function getTotal(player) {
   return scores[player].reduce((sum, v) => sum + (+v || 0), 0);
 }
@@ -90,7 +89,6 @@ function saveGame() {
   renderHistory();
 }
 
-
 function renderHistory() {
   const historyDiv = document.getElementById("history");
   if (!history.length) {
@@ -117,18 +115,21 @@ function scrollTable(distance) {
   });
 }
 
-// Init
-renderHistory();
-renderScorecard();
-
-// Close rules popup
+// ✅ Close rules popup
 function closeRules() {
-  document.getElementById("rulesPopup").style.display = "none";
+  const popup = document.getElementById("rulesPopup");
+  if (popup) {
+    popup.style.display = "none";
+  }
 }
 
-// Show popup on page load
-window.onload = function() {
-  document.getElementById("rulesPopup").style.display = "flex";
+// ✅ Show popup on page load without breaking other functions
+window.addEventListener("load", function() {
+  const popup = document.getElementById("rulesPopup");
+  if (popup) {
+    popup.style.display = "flex";
+  }
+
   renderHistory();
   renderScorecard();
-};
+});
