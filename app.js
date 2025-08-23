@@ -137,6 +137,21 @@ window.addEventListener("load", function() {
 // ✅ Re-open the rules popup
 function openRules() {
   const popup = document.getElementById("rulesPopup");
+
+  function saveCurrentGame() {
+  const currentGame = { players, scores };
+  localStorage.setItem("prehistoric_par_current", JSON.stringify(currentGame));
+}
+
+function loadCurrentGame() {
+  const saved = localStorage.getItem("prehistoric_par_current");
+  if (saved) {
+    const currentGame = JSON.parse(saved);
+    players = currentGame.players || [];
+    scores = currentGame.scores || {};
+  }
+}
+
   if (popup) {
     popup.style.display = "flex";
   }
