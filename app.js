@@ -28,7 +28,7 @@ function addPlayer() {
   scores[name] = Array(TOTAL_HOLES).fill("");
   nameInput.value = "";
   renderScorecard();
-  saveCurrentGame();
+  saveCurrentGame(); 
 }
 
 // ----------------- Scores -----------------
@@ -44,7 +44,7 @@ function updateScore(player, hole, value) {
 
   scores[player][hole] = value;
   renderScorecard();
-  saveCurrentGame();
+  saveCurrentGame(); 
 }
 
 function getTotal(player) {
@@ -121,7 +121,7 @@ function saveGame() {
   // Reset everything for a new game
   players = [];
   scores = {};
-  localStorage.removeItem("prehistoric_par_current");
+  localStorage.removeItem("prehistoric_par_current"); 
 
   const nameInput = document.getElementById("playerName");
   if (nameInput) nameInput.value = "";
@@ -154,14 +154,27 @@ function showWinnerPopup(game) {
   content.innerHTML = html;
   popup.style.display = "flex";
 
-  // 🎉 Confetti burst
-  const duration = 2 * 1000;
+  // 🎉 Confetti burst!
+  const duration = 2 * 1000; 
   const end = Date.now() + duration;
 
   (function frame() {
-    confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 } });
-    confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 } });
-    if (Date.now() < end) requestAnimationFrame(frame);
+    confetti({
+      particleCount: 4,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0 }
+    });
+    confetti({
+      particleCount: 4,
+      angle: 120,
+      spread: 55,
+      origin: { x: 1 }
+    });
+
+    if (Date.now() < end) {
+      requestAnimationFrame(frame);
+    }
   })();
 }
 
@@ -173,7 +186,10 @@ function closeWinnerPopup() {
 // ----------------- Table Scrolling -----------------
 function scrollTable(distance) {
   const container = document.querySelector('.table-scroll');
-  container.scrollBy({ left: distance, behavior: 'smooth' });
+  container.scrollBy({
+    left: distance,
+    behavior: 'smooth'
+  });
 }
 
 // ----------------- Rules Popup -----------------
@@ -184,4 +200,19 @@ function closeRules() {
 
 function openRules() {
   const popup = document.getElementById("rulesPopup");
-  if (popup) popup.style.display
+  if (popup) popup.style.display = "flex";
+}
+
+// ----------------- Init -----------------
+window.addEventListener("load", function() {
+  loadCurrentGame();
+  renderHistory();
+  renderScorecard();
+
+  // ✅ Auto-show rules only the first time
+  const popup = document.getElementById("rulesPopup");
+  if (popup && !localStorage.getItem("prehistoric_rules_seen")) {
+    popup.style.display = "flex";
+    localStorage.setItem("prehistoric_rules_seen", "yes");
+  }
+});
