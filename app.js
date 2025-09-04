@@ -114,7 +114,9 @@ function saveGame() {
 
   history.unshift(saved);
   localStorage.setItem("prehistoric_par_history", JSON.stringify(history));
-  alert("Game ended and saved!");
+
+  // ✅ Show Winner Popup instead of plain alert
+  showWinnerPopup(saved);
 
   // Reset everything for a new game
   players = [];
@@ -126,6 +128,37 @@ function saveGame() {
 
   renderScorecard();
   renderHistory();
+}
+
+// ----------------- Winner Popup -----------------
+function showWinnerPopup(game) {
+  // Sort players by score
+  const rankings = game.players
+    .map(p => ({
+      name: p,
+      total: game.scores[p].reduce((sum, v) => sum + (+v || 0), 0)
+    }))
+    .sort((a, b) => a.total - b.total);
+
+  const winner = rankings[0];
+
+  const popup = document.getElementById("winnerPopup");
+  const content = document.getElementById("winnerContent");
+
+  let html = `<h2>🎉 Congratulations ${winner.name}! 🎉</h2>`;
+  html += "<p>Here are the final rankings:</p><ul>";
+  rankings.forEach((p, i) => {
+    html += `<li>${i + 1}. ${p.name} — ${p.total} strokes</li>`;
+  });
+  html += "</ul>";
+
+  content.innerHTML = html;
+  popup.style.display = "flex";
+}
+
+function closeWinnerPopup() {
+  const popup = document.getElementById("winnerPopup");
+  if (popup) popup.style.display = "none";
 }
 
 // ----------------- Table Scrolling -----------------
