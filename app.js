@@ -144,7 +144,7 @@ function showWinnerPopup(game) {
   const popup = document.getElementById("winnerPopup");
   const content = document.getElementById("winnerContent");
 
-  let html = `<h2>🎉 Congratulations ${winner.name}! 🎉</h2>`;
+  let html = `<h2>🎉 Congratulations ${winner.name}, you're the winner! 🎉</h2>`;
   html += "<p>Here are the final rankings:</p><ul>";
   rankings.forEach((p, i) => {
     html += `<li>${i + 1}. ${p.name} — ${p.total} strokes</li>`;
