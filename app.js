@@ -28,7 +28,7 @@ function addPlayer() {
   scores[name] = Array(TOTAL_HOLES).fill("");
   nameInput.value = "";
   renderScorecard();
-  saveCurrentGame(); 
+  saveCurrentGame();
 }
 
 // ----------------- Scores -----------------
@@ -44,7 +44,7 @@ function updateScore(player, hole, value) {
 
   scores[player][hole] = value;
   renderScorecard();
-  saveCurrentGame(); 
+  saveCurrentGame();
 }
 
 function getTotal(player) {
@@ -121,7 +121,7 @@ function saveGame() {
   // Reset everything for a new game
   players = [];
   scores = {};
-  localStorage.removeItem("prehistoric_par_current"); 
+  localStorage.removeItem("prehistoric_par_current");
 
   const nameInput = document.getElementById("playerName");
   if (nameInput) nameInput.value = "";
@@ -154,18 +154,21 @@ function showWinnerPopup(game) {
   content.innerHTML = html;
   popup.style.display = "flex";
 
-  // 🎉 Confetti burst!
-  const duration = 2 * 1000; 
+  // 🎉 Confetti burst on custom canvas (in front of popup)
+  const myCanvas = document.getElementById("confettiCanvas");
+  const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
+
+  const duration = 2 * 1000;
   const end = Date.now() + duration;
 
   (function frame() {
-    confetti({
+    myConfetti({
       particleCount: 4,
       angle: 60,
       spread: 55,
       origin: { x: 0 }
     });
-    confetti({
+    myConfetti({
       particleCount: 4,
       angle: 120,
       spread: 55,
@@ -185,10 +188,10 @@ function closeWinnerPopup() {
 
 // ----------------- Table Scrolling -----------------
 function scrollTable(distance) {
-  const container = document.querySelector('.table-scroll');
+  const container = document.querySelector(".table-scroll");
   container.scrollBy({
     left: distance,
-    behavior: 'smooth'
+    behavior: "smooth"
   });
 }
 
