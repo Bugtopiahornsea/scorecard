@@ -7,6 +7,7 @@ body {
   margin: 0;
   color: #2c2c2c;
 }
+
 /* Popup overlay */
 .popup-overlay {
   position: fixed;
@@ -54,6 +55,74 @@ body {
 .close-popup:hover {
   background: #2e7d32;
 }
+
+/* Winner popup overlay */
+#winnerPopup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: none; /* hidden by default */
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+/* Winner popup content */
+.winner-popup-content {
+  background: #fff8e1;
+  padding: 30px;
+  border-radius: 20px;
+  text-align: center;
+  max-width: 400px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+  animation: popupFadeIn 0.6s ease-out;
+}
+
+/* Winner heading */
+.winner-popup-content h2 {
+  font-size: 2rem;
+  color: #2e7d32;
+  margin-bottom: 15px;
+  text-shadow: 2px 2px #c8e6c9;
+}
+
+/* Rankings list */
+.winner-popup-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.winner-popup-content li {
+  font-size: 1.2rem;
+  padding: 4px 0;
+  color: #4e342e;
+}
+
+/* Winner close button */
+.close-winner-popup {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  background: #ff7043;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.close-winner-popup:hover {
+  background: #f4511e;
+}
+
+/* Animation */
+@keyframes popupFadeIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
 /* App container */
 .app {
   max-width: 1000px;
@@ -199,27 +268,6 @@ input[type="number"] {
   border: 1px solid #aaa;
 }
 
-/* Sticky player name and total */
-.sticky-left {
-  position: sticky;
-  left: 0;
-  background: #a5d6a7;
-  z-index: 10;
-  font-weight: 600;
-  border-right: 2px solid #7cb342;
-  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-}
-
-.sticky-right {
-  position: sticky;
-  right: 0;
-  background: #fff3e0;
-  z-index: 9;
-  font-weight: bold;
-  border-left: 2px solid #ffcc80;
-  box-shadow: -2px 0 5px rgba(0,0,0,0.1);
-}
-
 /* Save button */
 .save-button {
   display: block;
@@ -251,7 +299,6 @@ input[type="number"] {
   background-color:#2e7d32;
 }
 
-
 /* History section */
 .history {
   background: #e8f5e9;
@@ -273,8 +320,7 @@ input[type="number"] {
 .max-strokes-reminder {
   text-align: center;
   font-size: 1rem;
-  color: #d84315; /* burnt orange for visibility */
+  color: #d84315;
   font-weight: bold;
   margin: 8px 0 20px;
 }
-
