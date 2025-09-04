@@ -28,7 +28,7 @@ function addPlayer() {
   scores[name] = Array(TOTAL_HOLES).fill("");
   nameInput.value = "";
   renderScorecard();
-  saveCurrentGame(); // ✅ save after adding player
+  saveCurrentGame();
 }
 
 // ----------------- Scores -----------------
@@ -44,7 +44,7 @@ function updateScore(player, hole, value) {
 
   scores[player][hole] = value;
   renderScorecard();
-  saveCurrentGame(); // ✅ save after updating score
+  saveCurrentGame();
 }
 
 function getTotal(player) {
@@ -121,7 +121,7 @@ function saveGame() {
   // Reset everything for a new game
   players = [];
   scores = {};
-  localStorage.removeItem("prehistoric_par_current"); // ✅ clear saved progress
+  localStorage.removeItem("prehistoric_par_current");
 
   const nameInput = document.getElementById("playerName");
   if (nameInput) nameInput.value = "";
@@ -132,7 +132,6 @@ function saveGame() {
 
 // ----------------- Winner Popup -----------------
 function showWinnerPopup(game) {
-  // Sort players by score
   const rankings = game.players
     .map(p => ({
       name: p,
@@ -155,29 +154,16 @@ function showWinnerPopup(game) {
   content.innerHTML = html;
   popup.style.display = "flex";
 
-  // 🎉 Confetti burst!
-  const duration = 2 * 1000; // 2 seconds
+  // 🎉 Confetti burst
+  const duration = 2 * 1000;
   const end = Date.now() + duration;
 
   (function frame() {
-    confetti({
-      particleCount: 4,
-      angle: 60,
-      spread: 55,
-      origin: { x: 0 }
-    });
-    confetti({
-      particleCount: 4,
-      angle: 120,
-      spread: 55,
-      origin: { x: 1 }
-    });
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
+    confetti({ particleCount: 4, angle: 60, spread: 55, origin: { x: 0 } });
+    confetti({ particleCount: 4, angle: 120, spread: 55, origin: { x: 1 } });
+    if (Date.now() < end) requestAnimationFrame(frame);
   })();
-
+}
 
 function closeWinnerPopup() {
   const popup = document.getElementById("winnerPopup");
@@ -187,35 +173,15 @@ function closeWinnerPopup() {
 // ----------------- Table Scrolling -----------------
 function scrollTable(distance) {
   const container = document.querySelector('.table-scroll');
-  container.scrollBy({
-    left: distance,
-    behavior: 'smooth'
-  });
+  container.scrollBy({ left: distance, behavior: 'smooth' });
 }
 
 // ----------------- Rules Popup -----------------
 function closeRules() {
   const popup = document.getElementById("rulesPopup");
-  if (popup) {
-    popup.style.display = "none";
-  }
+  if (popup) popup.style.display = "none";
 }
 
 function openRules() {
   const popup = document.getElementById("rulesPopup");
-  if (popup) {
-    popup.style.display = "flex";
-  }
-}
-
-// ----------------- Init -----------------
-window.addEventListener("load", function() {
-  loadCurrentGame();   // ✅ restore in-progress game if available
-  renderHistory();
-  renderScorecard();
-
-  const popup = document.getElementById("rulesPopup");
-  if (popup) {
-    popup.style.display = "flex"; // show rules first time
-  }
-});
+  if (popup) popup.style.display
