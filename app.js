@@ -132,6 +132,7 @@ function saveGame() {
 
 // ----------------- Winner Popup -----------------
 function showWinnerPopup(game) {
+  // Calculate totals and sort players
   const rankings = game.players
     .map(p => ({
       name: p,
@@ -139,51 +140,60 @@ function showWinnerPopup(game) {
     }))
     .sort((a, b) => a.total - b.total);
 
-  const winner = rankings[0];
+  // Find the winning score (lowest)
+  const winningScore = rankings[0].total;
+
+  // Get all winners (handle ties)
+  const winners = rankings.filter(p => p.total === winningScore);
 
   const popup = document.getElementById("winnerPopup");
   const content = document.getElementById("winnerContent");
 
-  let html = `<h2>🎉 Congratulations ${winner.name}, you're the winner! 🎉</h2>`;
-  html += "<p>Here are the final rankings:</p><ul>";
+  // Build the headline
+  let winnerNames = winners.map(w => w.name).join(", ");
+  let headline = winners.length > 1
+    ? `🎉 Congratulations ${winnerNames}, you're all winners! 🎉`
+    : `🎉 Congratulations ${winnerNames}, you're the winner! 🎉`;
+
+  // Build the rankings list
+  let html = `<h2>${headline}</h2><p>Here are the final rankings:</p><ul>`;
   rankings.forEach((p, i) => {
-    html += `<li>${i + 1}. ${p.name} — ${p.total} strokes</li>`;
+    // Highlight winner(s)
+    if (winners.some(w => w.name === p.name)) {
+      html += `<li style="font-weight:bold; color: #e67e22;">${i + 1}. ${p.name} — ${p.total} strokes</li>`;
+    } else {
+      html += `<li>${i + 1}. ${p.name} — ${p.total} strokes</li>`;
+    }
   });
   html += "</ul>";
 
   content.innerHTML = html;
   popup.style.display = "flex";
 
-  // 🎉 Confetti burst on custom canvas (in front of popup)
-  const myCanvas = document.getElementById("confettiCanvas");
-  const myConfetti = confetti.create(myCanvas, { resize: true, useWorker: true });
-
-  const duration = 2 * 1000;
+  // Confetti in front of popup
+  const duration = 2 * 1000; // 2 seconds
   const end = Date.now() + duration;
 
   (function frame() {
-    myConfetti({
+    confetti({
       particleCount: 4,
       angle: 60,
       spread: 55,
-      origin: { x: 0 }
+      origin: { x: 0 },
+      zIndex: 10000
     });
-    myConfetti({
+    confetti({
       particleCount: 4,
       angle: 120,
       spread: 55,
-      origin: { x: 1 }
+      origin: { x: 1 },
+      zIndex: 10000
     });
 
     if (Date.now() < end) {
       requestAnimationFrame(frame);
     }
   })();
-}
-
-function closeWinnerPopup() {
-  const popup = document.getElementById("winnerPopup");
-  if (popup) popup.style.display = "none";
 }
 
 // ----------------- Table Scrolling -----------------
