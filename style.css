@@ -92,6 +92,17 @@ body {
   text-shadow: 2px 2px #c8e6c9;
 }
 
+#confettiCanvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;   /* don’t block clicks */
+  z-index: 10001;         /* higher than popup (10000) */
+}
+
+
 /* Rankings list */
 .winner-popup-content ul {
   list-style: none;
