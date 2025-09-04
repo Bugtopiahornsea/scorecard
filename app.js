@@ -196,6 +196,12 @@ function showWinnerPopup(game) {
   })();
 }
 
+// New function for closing winner popup
+function closeWinnerPopup() {
+  const popup = document.getElementById("winnerPopup");
+  if (popup) popup.style.display = "none";
+}
+
 // ----------------- Table Scrolling -----------------
 function scrollTable(distance) {
   const container = document.querySelector(".table-scroll");
