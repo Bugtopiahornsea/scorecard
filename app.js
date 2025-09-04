@@ -154,8 +154,6 @@ function showWinnerPopup(game) {
 
   content.innerHTML = html;
   popup.style.display = "flex";
-}
-  popup.style.display = "flex";
 
   // 🎉 Confetti burst!
   const duration = 2 * 1000; // 2 seconds
